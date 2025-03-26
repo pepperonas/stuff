@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Command Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-buttons">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+        </div>
+        <div class="terminal-title">Linux Command Quiz</div>
+    </div>
+    <div class="terminal-body">
+        <div id="terminal-output">
+            <div class="welcome-message">
+            <pre>
+ _     _                    _____                                          _   _____       _
+| |   (_)                  /  __ \                                        | | |  _  |     (_)
+| |    _ _ __  _   ___  __ | /  \/ ___  _ __ ___  _ __ ___   __ _ _ __   __| | | | | |_   _ ____
+| |   | | '_ \| | | \ \/ / | |    / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` | | | | | | | |_  /
+| |___| | | | | |_| |>  <  | \__/\ (_) | | | | | | | | | | | (_| | | | | (_| | \ \/' / |_| |/ /
+\_____/_|_| |_|\__,_/_/\_\  \____/\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_|  \_/\_\\__,_/___|
+            </pre>
+                <p>Willkommen zum Linux-Befehle-Quiz! Teste dein Wissen zu alltäglichen
+                    Linux-Befehlen.</p>
+                <p>Tippe <span class="cmd">start</span> um zu beginnen oder <span
+                        class="cmd">help</span> für Hilfe.</p>
+            </div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">user@linux:~$</span>
+            <input type="text" id="terminal-input" autofocus>
+        </div>
+    </div>
+    <div class="terminal-footer">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="stats">
+            <span id="correct-count">0</span> richtig |
+            <span id="question-count">0</span>/<span id="total-questions">0</span> Fragen
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
