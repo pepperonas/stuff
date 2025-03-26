@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const terminalInput = document.getElementById('terminal-input');
     const terminalOutput = document.getElementById('terminal-output');
     const progressBar = document.getElementById('progress-bar');
@@ -307,6 +307,310 @@ document.addEventListener('DOMContentLoaded', function() {
             answer: "uname",
             hint: "Steht für 'Unix name'",
             explanation: "Der Befehl 'uname' zeigt Informationen über das Betriebssystem an, z.B. 'uname -a' für alle Informationen."
+        },
+
+        {
+            question: "Welcher Befehl wird verwendet, um bestimmte Spalten aus einer Textdatei zu extrahieren?",
+            answer: "cut",
+            hint: "Der Name beschreibt die Funktion - etwas 'ausschneiden'",
+            explanation: "Mit 'cut' kann man bestimmte Spalten oder Felder aus einer Textdatei extrahieren, z.B. 'cut -d':' -f1 /etc/passwd'."
+        },
+
+        // su
+        {
+            question: "Welcher Befehl erlaubt es, den Benutzer zu wechseln?",
+            answer: "su",
+            hint: "Steht für 'substitute user' oder 'switch user'",
+            explanation: "Mit 'su' (substitute user) wechselt man den Benutzer, z.B. 'su root' um zum Root-Benutzer zu wechseln."
+        },
+
+        // chgrp
+        {
+            question: "Welcher Befehl ändert die Gruppe einer Datei?",
+            answer: "chgrp",
+            hint: "Steht für 'change group'",
+            explanation: "Mit 'chgrp' (change group) ändert man die Gruppe einer Datei, z.B. 'chgrp entwickler projekt.txt'."
+        },
+
+        // passwd
+        {
+            question: "Welcher Befehl wird verwendet, um das Passwort eines Benutzers zu ändern?",
+            answer: "passwd",
+            hint: "Abgeleitet von 'password'",
+            explanation: "Mit 'passwd' ändert man das Passwort eines Benutzers, z.B. 'passwd' für das eigene oder 'sudo passwd benutzer' für andere Benutzer."
+        },
+
+        // useradd
+        {
+            question: "Welcher Befehl erstellt einen neuen Benutzer im System?",
+            answer: "useradd",
+            hint: "Der Name beschreibt die Funktion - einen Benutzer hinzufügen",
+            explanation: "Mit 'useradd' erstellt man einen neuen Benutzer, z.B. 'sudo useradd -m neuerbenutzer'."
+        },
+
+        // alias
+        {
+            question: "Welcher Befehl erstellt Kurznamen für andere Befehle?",
+            answer: "alias",
+            hint: "Ein anderer Name für etwas oder jemanden",
+            explanation: "Mit 'alias' erstellt man Kurznamen für andere Befehle, z.B. 'alias ll='ls -la''."
+        },
+
+        // echo
+        {
+            question: "Welcher Befehl gibt Text auf dem Terminal aus?",
+            answer: "echo",
+            hint: "Wie ein Echo, das zurückkommt",
+            explanation: "Der Befehl 'echo' gibt Text auf dem Terminal aus, z.B. 'echo Hallo Welt'."
+        },
+
+        // date
+        {
+            question: "Welcher Befehl zeigt das aktuelle Datum und die Uhrzeit an?",
+            answer: "date",
+            hint: "Das englische Wort für 'Datum'",
+            explanation: "Der Befehl 'date' zeigt das aktuelle Datum und die Uhrzeit an."
+        },
+
+        // lscpu
+        {
+            question: "Welcher Befehl zeigt detaillierte Informationen über die CPU an?",
+            answer: "lscpu",
+            hint: "Kombination aus 'ls' (list) und 'cpu'",
+            explanation: "Der Befehl 'lscpu' zeigt detaillierte Informationen über die CPU(s) des Systems an."
+        },
+
+        // hostname
+        {
+            question: "Welcher Befehl zeigt den Namen des Computers im Netzwerk an?",
+            answer: "hostname",
+            hint: "Der Name sagt es schon - der 'Name des Hosts'",
+            explanation: "Der Befehl 'hostname' zeigt den Namen des Computers im Netzwerk an oder ändert ihn."
+        },
+
+        // who
+        {
+            question: "Welcher Befehl zeigt an, welche Benutzer aktuell am System angemeldet sind?",
+            answer: "who",
+            hint: "Fragt: 'Wer ist angemeldet?'",
+            explanation: "Der Befehl 'who' zeigt an, welche Benutzer aktuell am System angemeldet sind."
+        },
+
+        // finger
+        {
+            question: "Welcher Befehl zeigt detaillierte Informationen über Benutzer an?",
+            answer: "finger",
+            hint: "Wie wenn man mit dem Finger auf jemanden zeigt",
+            explanation: "Der Befehl 'finger' zeigt detaillierte Informationen über Benutzer an, z.B. 'finger benutzer'."
+        },
+
+        // ufw
+        {
+            question: "Welcher Befehl ist eine benutzerfreundliche Schnittstelle zur Firewall-Konfiguration?",
+            answer: "ufw",
+            hint: "Steht für 'Uncomplicated Firewall'",
+            explanation: "Der Befehl 'ufw' (Uncomplicated Firewall) ist eine benutzerfreundliche Schnittstelle zur Firewall-Konfiguration."
+        },
+
+        // iptables
+        {
+            question: "Welcher Befehl konfiguriert die Firewall-Regeln direkt im Linux-Kernel?",
+            answer: "iptables",
+            hint: "Besteht aus 'ip' und 'tables' - Tabellen für IP-Regeln",
+            explanation: "Mit 'iptables' konfiguriert man die Firewall-Regeln direkt im Linux-Kernel, z.B. 'iptables -A INPUT -p tcp --dport 22 -j ACCEPT'."
+        },
+
+        // systemctl
+        {
+            question: "Welcher Befehl verwaltet Systemdienste in modernen Linux-Distributionen?",
+            answer: "systemctl",
+            hint: "Steht für 'system control'",
+            explanation: "Mit 'systemctl' verwaltet man Systemdienste, z.B. 'systemctl start apache2' um den Apache-Webserver zu starten."
+        },
+
+        // curl
+        {
+            question: "Welcher Befehl überträgt Daten von oder zu einem Server?",
+            answer: "curl",
+            hint: "Steht für 'Client URL'",
+            explanation: "Mit 'curl' überträgt man Daten von oder zu einem Server, z.B. 'curl https://example.com'."
+        },
+
+        // dig
+        {
+            question: "Welcher Befehl fragt DNS-Informationen ab?",
+            answer: "dig",
+            hint: "Wie 'graben' (dig) nach Informationen",
+            explanation: "Mit 'dig' fragt man DNS-Informationen ab, z.B. 'dig example.com' um die IP-Adresse einer Domain zu erfahren."
+        },
+
+        // dd
+        {
+            question: "Welcher Befehl kopiert und konvertiert Dateien auf niedriger Ebene?",
+            answer: "dd",
+            hint: "Ursprünglich 'data duplicator' oder 'disk dump'",
+            explanation: "Mit 'dd' kopiert und konvertiert man Dateien auf niedriger Ebene, z.B. 'dd if=/dev/sda of=backup.img'."
+        },
+
+        // kill
+        {
+            question: "Welcher Befehl beendet einen laufenden Prozess?",
+            answer: "kill",
+            hint: "Der englische Begriff für 'töten' oder 'beenden'",
+            explanation: "Mit 'kill' beendet man einen laufenden Prozess, z.B. 'kill 1234' um den Prozess mit der ID 1234 zu beenden."
+        },
+
+        // arp
+        {
+            question: "Welcher Befehl zeigt und verwaltet die ARP-Tabelle des Systems?",
+            answer: "arp",
+            hint: "Steht für 'Address Resolution Protocol'",
+            explanation: "Der Befehl 'arp' zeigt und verwaltet die ARP-Tabelle, die IP-Adressen zu MAC-Adressen zuordnet."
+        },
+
+        // ss
+        {
+            question: "Welcher moderne Befehl zeigt Netzwerkverbindungen an (Ersatz für netstat)?",
+            answer: "ss",
+            hint: "Steht für 'socket statistics'",
+            explanation: "Der Befehl 'ss' zeigt Netzwerkverbindungen und Socket-Informationen an und ist der moderne Ersatz für netstat."
+        },
+
+        // vi/vim
+        {
+            question: "Welcher klassische Texteditor ist in fast jedem Unix/Linux-System verfügbar?",
+            answer: "vi",
+            acceptableAnswers: ["vi", "vim"],
+            hint: "Steht für 'visual editor' oder 'vi improved'",
+            explanation: "Vi/Vim ist ein leistungsstarker Texteditor, der in fast jedem Unix/Linux-System verfügbar ist."
+        },
+
+        // grep
+        {
+            question: "Welcher Befehl durchsucht Dateien nach bestimmten Textmustern?",
+            answer: "grep",
+            hint: "Ursprünglich ein Befehl aus dem ed-Editor: g/re/p (global/regular expression/print)",
+            explanation: "Mit 'grep' durchsucht man Dateien nach Textmustern, z.B. 'grep 'Fehler' logdatei.txt'."
+        },
+
+        // sed
+        {
+            question: "Welcher Befehl bearbeitet Textströme und führt Transformationen durch?",
+            answer: "sed",
+            hint: "Steht für 'stream editor'",
+            explanation: "Mit 'sed' bearbeitet man Textströme, z.B. 'sed 's/alt/neu/g' datei.txt' ersetzt alle Vorkommen von 'alt' durch 'neu'."
+        },
+
+        // awk
+        {
+            question: "Welcher Befehl ist eine mächtige Programmiersprache zur Textverarbeitung?",
+            answer: "awk",
+            hint: "Benannt nach den Initialen seiner Entwickler (Aho, Weinberger, Kernighan)",
+            explanation: "AWK ist eine mächtige Programmiersprache zur Textverarbeitung, z.B. 'awk '{print $1}' datei.txt' gibt die erste Spalte aus."
+        },
+
+        // scp
+        {
+            question: "Welcher Befehl kopiert Dateien sicher zwischen Hosts über SSH?",
+            answer: "scp",
+            hint: "Steht für 'secure copy'",
+            explanation: "Mit 'scp' kopiert man Dateien sicher zwischen Hosts, z.B. 'scp datei.txt benutzer@server:/ziel/'."
+        },
+
+        // rsync
+        {
+            question: "Welcher Befehl synchronisiert Dateien und Verzeichnisse effizient?",
+            answer: "rsync",
+            hint: "Steht für 'remote synchronization'",
+            explanation: "Mit 'rsync' synchronisiert man Dateien und Verzeichnisse effizient, z.B. 'rsync -av quelle/ ziel/'."
+        },
+
+        // crontab
+        {
+            question: "Welcher Befehl verwaltet geplante Aufgaben, die regelmäßig ausgeführt werden sollen?",
+            answer: "crontab",
+            hint: "Von 'chronos' (Zeit) und 'table' (Tabelle)",
+            explanation: "Mit 'crontab' verwaltet man geplante Aufgaben, z.B. 'crontab -e' um den Editor zu öffnen."
+        },
+
+        // gzip
+        {
+            question: "Welcher Befehl komprimiert Dateien im gzip-Format?",
+            answer: "gzip",
+            hint: "Der Name des Komprimierungsformats",
+            explanation: "Mit 'gzip' komprimiert man Dateien, z.B. 'gzip datei.txt' erzeugt datei.txt.gz."
+        },
+
+        // ln
+        {
+            question: "Welcher Befehl erstellt Links (Verknüpfungen) zwischen Dateien?",
+            answer: "ln",
+            hint: "Kurz für 'link'",
+            explanation: "Mit 'ln' erstellt man Links zwischen Dateien, z.B. 'ln -s ziel verknüpfung' für einen symbolischen Link."
+        },
+
+        // diff
+        {
+            question: "Welcher Befehl zeigt die Unterschiede zwischen zwei Dateien an?",
+            answer: "diff",
+            hint: "Kurz für 'difference'",
+            explanation: "Mit 'diff' vergleicht man Dateien und zeigt die Unterschiede an, z.B. 'diff datei1.txt datei2.txt'."
+        },
+
+        // sort
+        {
+            question: "Welcher Befehl sortiert die Zeilen einer Textdatei?",
+            answer: "sort",
+            hint: "Der englische Begriff für 'sortieren'",
+            explanation: "Mit 'sort' sortiert man die Zeilen einer Textdatei, z.B. 'sort namen.txt'."
+        },
+
+        // uniq
+        {
+            question: "Welcher Befehl filtert wiederholte Zeilen aus einer sortierten Datei?",
+            answer: "uniq",
+            hint: "Kurz für 'unique' (einzigartig)",
+            explanation: "Mit 'uniq' filtert man wiederholte Zeilen aus einer sortierten Datei, z.B. 'sort datei.txt | uniq'."
+        },
+
+        // wc
+        {
+            question: "Welcher Befehl zählt Zeilen, Wörter und Zeichen in einer Datei?",
+            answer: "wc",
+            hint: "Steht für 'word count'",
+            explanation: "Der Befehl 'wc' zählt Zeilen, Wörter und Zeichen in einer Datei, z.B. 'wc -l datei.txt' für die Zeilenanzahl."
+        },
+
+        // head
+        {
+            question: "Welcher Befehl zeigt die ersten Zeilen einer Datei an?",
+            answer: "head",
+            hint: "Der englische Begriff für 'Kopf' oder 'Anfang'",
+            explanation: "Mit 'head' zeigt man die ersten Zeilen einer Datei an, z.B. 'head -n 10 datei.txt' für die ersten 10 Zeilen."
+        },
+
+        // tail
+        {
+            question: "Welcher Befehl zeigt die letzten Zeilen einer Datei an?",
+            answer: "tail",
+            hint: "Der englische Begriff für 'Schwanz' oder 'Ende'",
+            explanation: "Mit 'tail' zeigt man die letzten Zeilen einer Datei an, z.B. 'tail -n 10 datei.txt' für die letzten 10 Zeilen."
+        },
+
+        // less
+        {
+            question: "Welcher Befehl zeigt den Inhalt einer Datei seitenweise an?",
+            answer: "less",
+            hint: "Das Gegenteil von 'more'",
+            explanation: "Mit 'less' zeigt man den Inhalt einer Datei seitenweise an und kann vor- und zurückblättern, z.B. 'less datei.txt'."
+        },
+
+        // mount
+        {
+            question: "Welcher Befehl hängt Dateisysteme in den Verzeichnisbaum ein?",
+            answer: "mount",
+            hint: "Der englische Begriff für 'montieren' oder 'einhängen'",
+            explanation: "Mit 'mount' hängt man Dateisysteme in den Verzeichnisbaum ein, z.B. 'mount /dev/sdb1 /mnt'."
         }
     ];
 
@@ -318,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', () => terminalInput.focus());
 
 // Eingabe verarbeiten
-    terminalInput.addEventListener('keydown', function(e) {
+    terminalInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             const input = terminalInput.value.trim();
 
@@ -337,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function processInput(input) {
         if (!quizStarted) {
 // Befehle vor dem Quiz-Start
-            switch(input.toLowerCase()) {
+            switch (input.toLowerCase()) {
                 case 'start':
                     startQuiz();
                     break;
@@ -356,7 +660,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } else {
 // Befehle während des Quiz
-            switch(input.toLowerCase()) {
+            switch (input.toLowerCase()) {
                 case 'hint':
                     showHint();
                     break;
