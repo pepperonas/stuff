@@ -270,6 +270,8 @@ body {
 .command {
     color: #d8dee9;
     margin: 5px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .command-line {
@@ -279,10 +281,13 @@ body {
 
 .command-line .prompt {
     margin-right: 8px;
+    white-space: nowrap;
 }
 
 .command-line .command-text {
     color: #d8dee9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .output {
@@ -290,6 +295,8 @@ body {
     margin: 5px 0 15px 0;
     padding: 5px 0 5px 10px;
     border-left: 2px solid #434c5e;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .terminal-image {

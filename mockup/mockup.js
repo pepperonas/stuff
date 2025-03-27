@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const textControls = document.getElementById('text-controls');
     const imageControls = document.getElementById('image-controls');
     const asciiControls = document.getElementById('ascii-controls');
-    const textAsOutput = document.getElementById('text-as-output');
-    const showCommands = document.getElementById('show-commands');
+    // const textAsOutput = document.getElementById('text-as-output');
+    // const showCommands = document.getElementById('show-commands');
     const imageUpload = document.getElementById('image-upload');
     const imageWidth = document.getElementById('image-width');
     const imageCenter = document.getElementById('image-center');
@@ -150,52 +150,19 @@ _)      \\.___.,|     .'
         const text = customText.value;
         if (!text.trim()) return;
 
-        if (textAsOutput.checked) {
-            // Format as command output
-            const outputDiv = document.createElement('div');
-            outputDiv.className = 'output';
-            outputDiv.textContent = text;
-            terminalOutput.appendChild(outputDiv);
-        } else if (showCommands.checked) {
-            // Show as commands and outputs
-            const lines = text.split('\n');
-            let isCommand = true;
+        // Plain text with line breaks
+        const textDiv = document.createElement('div');
+        textDiv.className = 'command';
 
-            lines.forEach(line => {
-                if (line.trim()) {
-                    if (isCommand) {
-                        // Create command line with prompt
-                        const cmdLineDiv = document.createElement('div');
-                        cmdLineDiv.className = 'command-line';
+        // Handle line breaks correctly
+        text.split('\n').forEach((line, index, array) => {
+            if (index > 0) {
+                textDiv.appendChild(document.createElement('br'));
+            }
+            textDiv.appendChild(document.createTextNode(line));
+        });
 
-                        const promptSpan = document.createElement('span');
-                        promptSpan.className = 'prompt';
-                        promptSpan.textContent = promptInput.value;
-
-                        const cmdTextSpan = document.createElement('span');
-                        cmdTextSpan.className = 'command-text';
-                        cmdTextSpan.textContent = line;
-
-                        cmdLineDiv.appendChild(promptSpan);
-                        cmdLineDiv.appendChild(cmdTextSpan);
-                        terminalOutput.appendChild(cmdLineDiv);
-                    } else {
-                        // Create output
-                        const outputDiv = document.createElement('div');
-                        outputDiv.className = 'output';
-                        outputDiv.textContent = line;
-                        terminalOutput.appendChild(outputDiv);
-                    }
-                    isCommand = !isCommand;
-                }
-            });
-        } else {
-            // Plain text
-            const textDiv = document.createElement('div');
-            textDiv.className = 'command';
-            textDiv.textContent = text;
-            terminalOutput.appendChild(textDiv);
-        }
+        terminalOutput.appendChild(textDiv);
     }
 
     // Insert image content into terminal
