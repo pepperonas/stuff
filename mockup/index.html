@@ -32,91 +32,186 @@
     <div class="controls-panel">
         <h2>Mockup Generator</h2>
 
-        <div class="control-group">
-            <label for="terminal-title-input">Window Title:</label>
-            <input type="text" id="terminal-title-input" value="">
-        </div>
-
-        <div class="control-group">
-            <label for="prompt-input">Terminal Prompt:</label>
-            <input type="text" id="prompt-input" value="">
-        </div>
-
-        <div class="control-group">
-            <label for="content-type">Content Type:</label>
-            <select id="content-type">
-                <option value="text">Text Content</option>
-                <option value="image">Image</option>
-                <option value="ascii-art">ASCII Art</option>
-            </select>
-        </div>
-
-        <div id="text-controls" class="content-controls">
-            <label for="custom-text">Custom Text:</label>
-            <textarea id="custom-text" rows="8"
-                      placeholder="Enter custom text to display in the terminal..."></textarea>
-
-            <!--            <div class="text-format-controls">-->
-            <!--                <label>-->
-            <!--                    <input type="checkbox" id="text-as-output"> Format as command output-->
-            <!--                </label>-->
-            <!--                <label>-->
-            <!--                    <input type="checkbox" id="show-commands"> Show commands before output-->
-            <!--                </label>-->
-            <!--            </div>-->
-        </div>
-
-        <div id="image-controls" class="content-controls" style="display: none;">
-            <label for="image-upload">Upload Image:</label>
-            <input type="file" id="image-upload" accept="image/*">
-            <div class="image-options">
-                <label for="image-width">Width (%):</label>
-                <input type="range" id="image-width" min="10" max="100" value="80">
-                <label for="image-center">
-                    <input type="checkbox" id="image-center" checked> Center image
+        <!-- Mockup Type Selection -->
+        <div class="control-group mockup-type-selection">
+            <label>Mockup Type:</label>
+            <div class="mockup-type-options">
+                <label>
+                    <input type="radio" name="mockup-type" value="terminal" checked> Terminal
+                </label>
+                <label>
+                    <input type="radio" name="mockup-type" value="smartphone"> Smartphone
                 </label>
             </div>
         </div>
 
-        <div id="ascii-controls" class="content-controls" style="display: none;">
-            <label for="ascii-selection">Select ASCII Art:</label>
-            <select id="ascii-selection">
-                <option value="tux">Tux (Linux Penguin)</option>
-                <option value="computer">Computer</option>
-                <option value="linux">Linux Logo</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="theme-selector">Terminal Theme:</label>
-            <select id="theme-selector">
-                <optgroup label="Dark Themes">
-                    <option value="nord">Nord (Default)</option>
-                    <option value="monokai">Monokai</option>
-                    <option value="solarized-dark">Solarized Dark</option>
-                    <option value="github-dark">GitHub Dark</option>
-                    <option value="dracula">Dracula</option>
-                </optgroup>
-                <optgroup label="Light Themes">
-                    <option value="light">Light</option>
-                    <option value="github-light">GitHub Light</option>
-                    <option value="solarized-light">Solarized Light</option>
-                    <option value="atom-light">Atom Light</option>
-                    <option value="xcode-light">Xcode Light</option>
-                </optgroup>
-            </select>
-        </div>
-
-        <div class="control-group custom-bg-color">
-            <label for="custom-bg-color">Custom background color:</label>
-            <div class="color-input-container">
-                <input type="text" id="custom-bg-color" placeholder="#000000" maxlength="7">
-                <input type="color" id="color-picker" value="#000000">
-                <button id="apply-bg-color">Apply</button>
+        <!-- Terminal Controls Section -->
+        <div id="terminal-controls">
+            <div class="control-group">
+                <label for="terminal-title-input">Window Title:</label>
+                <input type="text" id="terminal-title-input" value="">
             </div>
-            <div class="checkbox-option">
-                <input type="checkbox" id="use-custom-bg">
-                <label for="use-custom-bg">Use custom background color</label>
+
+            <div class="control-group">
+                <label for="prompt-input">Terminal Prompt:</label>
+                <input type="text" id="prompt-input" value="">
+            </div>
+
+            <div class="control-group">
+                <label for="content-type">Content Type:</label>
+                <select id="content-type">
+                    <option value="text">Text Content</option>
+                    <option value="image">Image</option>
+                    <option value="ascii-art">ASCII Art</option>
+                </select>
+            </div>
+
+            <div id="text-controls" class="content-controls">
+                <label for="custom-text">Custom Text:</label>
+                <textarea id="custom-text" rows="8"
+                          placeholder="Enter custom text to display in the terminal..."></textarea>
+            </div>
+
+            <div id="image-controls" class="content-controls" style="display: none;">
+                <label for="image-upload">Upload Image:</label>
+                <input type="file" id="image-upload" accept="image/*">
+                <div class="image-options">
+                    <label for="image-width">Width (%):</label>
+                    <input type="range" id="image-width" min="10" max="100" value="80">
+                    <label for="image-center">
+                        <input type="checkbox" id="image-center" checked> Center image
+                    </label>
+                </div>
+            </div>
+
+            <div id="ascii-controls" class="content-controls" style="display: none;">
+                <label for="ascii-selection">Select ASCII Art:</label>
+                <select id="ascii-selection">
+                    <option value="tux">Tux (Linux Penguin)</option>
+                    <option value="computer">Computer</option>
+                    <option value="linux">Linux Logo</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="theme-selector">Terminal Theme:</label>
+                <select id="theme-selector">
+                    <optgroup label="Dark Themes">
+                        <option value="nord">Nord (Default)</option>
+                        <option value="monokai">Monokai</option>
+                        <option value="solarized-dark">Solarized Dark</option>
+                        <option value="github-dark">GitHub Dark</option>
+                        <option value="dracula">Dracula</option>
+                    </optgroup>
+                    <optgroup label="Light Themes">
+                        <option value="light">Light</option>
+                        <option value="github-light">GitHub Light</option>
+                        <option value="solarized-light">Solarized Light</option>
+                        <option value="atom-light">Atom Light</option>
+                        <option value="xcode-light">Xcode Light</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="control-group custom-bg-color">
+                <label for="custom-bg-color">Custom background color:</label>
+                <div class="color-input-container">
+                    <input type="text" id="custom-bg-color" placeholder="#000000" maxlength="7">
+                    <input type="color" id="color-picker" value="#000000">
+                    <button id="apply-bg-color">Apply</button>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="use-custom-bg">
+                    <label for="use-custom-bg">Use custom background color</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smartphone Controls Section -->
+        <div id="smartphone-controls" style="display: none;">
+            <div class="control-group">
+                <label for="phone-model">Phone Model:</label>
+                <select id="phone-model">
+                    <option value="iphone">iPhone</option>
+                    <option value="android">Android</option>
+                    <option value="pixel">Google Pixel</option>
+                    <option value="samsung">Samsung Galaxy</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="phone-color">Device Color:</label>
+                <select id="phone-color">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="gold">Gold</option>
+                    <option value="silver">Silver</option>
+                    <option value="blue">Blue</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="screen-content-type">Screen Content:</label>
+                <select id="screen-content-type">
+                    <option value="screenshot">Screenshot</option>
+                    <option value="app">App Interface</option>
+                    <option value="browser">Browser</option>
+                    <option value="custom">Custom Content</option>
+                </select>
+            </div>
+
+            <div id="screenshot-controls" class="content-controls">
+                <label for="screenshot-upload">Upload Screenshot:</label>
+                <input type="file" id="screenshot-upload" accept="image/*">
+            </div>
+
+            <div id="app-controls" class="content-controls" style="display: none;">
+                <label for="app-title">App Name:</label>
+                <input type="text" id="app-title" value="My App">
+
+                <label for="app-content">App Content:</label>
+                <textarea id="app-content" rows="8" placeholder="Enter app content or HTML..."></textarea>
+            </div>
+
+            <div id="browser-controls" class="content-controls" style="display: none;">
+                <label for="browser-url">URL:</label>
+                <input type="text" id="browser-url" value="https://example.com">
+
+                <label for="browser-content">Browser Content:</label>
+                <textarea id="browser-content" rows="8" placeholder="Enter webpage content or HTML..."></textarea>
+            </div>
+
+            <div id="custom-screen-controls" class="content-controls" style="display: none;">
+                <label for="custom-screen-content">Custom Screen Content:</label>
+                <textarea id="custom-screen-content" rows="8" placeholder="Enter custom content or HTML..."></textarea>
+            </div>
+
+            <div class="control-group">
+                <label>Status Bar Options:</label>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="show-battery" checked>
+                    <label for="show-battery">Show Battery</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="show-wifi" checked>
+                    <label for="show-wifi">Show WiFi</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="show-signal" checked>
+                    <label for="show-signal">Show Signal</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="show-time" checked>
+                    <label for="show-time">Show Time</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="status-bar-style">Status Bar Style:</label>
+                <select id="status-bar-style">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
             </div>
         </div>
 
@@ -127,6 +222,7 @@
     </div>
 
     <div class="mockup-preview">
+        <!-- Terminal Mockup -->
         <div class="terminal-container" id="mockup-terminal">
             <div class="terminal-header">
                 <div class="terminal-buttons">
@@ -142,8 +238,30 @@
                 </div>
                 <div class="input-line">
                     <span class="prompt" id="display-prompt">user@linux:~$</span>
-                    <!--                    <span class="cursor"></span>-->
                 </div>
+            </div>
+        </div>
+
+        <!-- Smartphone Mockup -->
+        <div class="smartphone-container" id="mockup-smartphone" style="display: none;">
+            <div class="smartphone-frame iphone">
+                <div class="smartphone-screen">
+                    <div class="smartphone-notch"></div>
+                    <div class="smartphone-status-bar">
+                        <div class="status-left">
+                            <span class="status-time">12:30</span>
+                        </div>
+                        <div class="status-right">
+                            <span class="status-signal"></span>
+                            <span class="status-wifi"></span>
+                            <span class="status-battery"></span>
+                        </div>
+                    </div>
+                    <div class="smartphone-content" id="smartphone-content">
+                        <!-- Smartphone content will be inserted here -->
+                    </div>
+                </div>
+                <div class="smartphone-button home-button"></div>
             </div>
         </div>
     </div>
