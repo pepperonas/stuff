@@ -42,6 +42,9 @@
                 <label>
                     <input type="radio" name="mockup-type" value="smartphone"> Smartphone
                 </label>
+                <label>
+                    <input type="radio" name="mockup-type" value="tablet"> Tablet
+                </label>
             </div>
         </div>
 
@@ -170,7 +173,8 @@
                 <input type="text" id="app-title" value="My App">
 
                 <label for="app-content">App Content:</label>
-                <textarea id="app-content" rows="8" placeholder="Enter app content or HTML..."></textarea>
+                <textarea id="app-content" rows="8"
+                          placeholder="Enter app content or HTML..."></textarea>
             </div>
 
             <div id="browser-controls" class="content-controls" style="display: none;">
@@ -178,12 +182,14 @@
                 <input type="text" id="browser-url" value="https://example.com">
 
                 <label for="browser-content">Browser Content:</label>
-                <textarea id="browser-content" rows="8" placeholder="Enter webpage content or HTML..."></textarea>
+                <textarea id="browser-content" rows="8"
+                          placeholder="Enter webpage content or HTML..."></textarea>
             </div>
 
             <div id="custom-screen-controls" class="content-controls" style="display: none;">
                 <label for="custom-screen-content">Custom Screen Content:</label>
-                <textarea id="custom-screen-content" rows="8" placeholder="Enter custom content or HTML..."></textarea>
+                <textarea id="custom-screen-content" rows="8"
+                          placeholder="Enter custom content or HTML..."></textarea>
             </div>
 
             <div class="control-group">
@@ -209,6 +215,127 @@
             <div class="control-group">
                 <label for="status-bar-style">Status Bar Style:</label>
                 <select id="status-bar-style">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tablet Controls Section -->
+        <div id="tablet-controls" style="display: none;">
+            <div class="control-group">
+                <label for="tablet-model">Tablet Model:</label>
+                <select id="tablet-model">
+                    <option value="ipad">iPad</option>
+                    <option value="ipad-pro">iPad Pro</option>
+                    <option value="surface">Surface Pro</option>
+                    <option value="galaxy-tab">Galaxy Tab</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="tablet-orientation">Orientation:</label>
+                <select id="tablet-orientation">
+                    <option value="landscape">Landscape</option>
+                    <option value="portrait">Portrait</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="tablet-color">Device Color:</label>
+                <select id="tablet-color">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="gold">Gold</option>
+                    <option value="silver">Silver</option>
+                    <option value="blue">Blue</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="tablet-content-type">Screen Content:</label>
+                <select id="tablet-content-type">
+                    <option value="screenshot">Screenshot</option>
+                    <option value="app">App Interface</option>
+                    <option value="splitview">Split View</option>
+                    <option value="browser">Browser</option>
+                    <option value="custom">Custom Content</option>
+                </select>
+            </div>
+
+            <div id="tablet-screenshot-controls" class="content-controls">
+                <label for="tablet-screenshot-upload">Upload Screenshot:</label>
+                <input type="file" id="tablet-screenshot-upload" accept="image/*">
+            </div>
+
+            <div id="tablet-app-controls" class="content-controls" style="display: none;">
+                <label for="tablet-app-title">App Name:</label>
+                <input type="text" id="tablet-app-title" value="Tablet App">
+
+                <label for="tablet-app-content">App Content:</label>
+                <textarea id="tablet-app-content" rows="8"
+                          placeholder="Enter app content or HTML..."></textarea>
+            </div>
+
+            <div id="tablet-splitview-controls" class="content-controls" style="display: none;">
+                <label for="tablet-splitview-left-title">Left App:</label>
+                <input type="text" id="tablet-splitview-left-title" value="Left App">
+
+                <label for="tablet-splitview-left-content">Left Content:</label>
+                <textarea id="tablet-splitview-left-content" rows="5"
+                          placeholder="Left side content..."></textarea>
+
+                <label for="tablet-splitview-right-title">Right App:</label>
+                <input type="text" id="tablet-splitview-right-title" value="Right App">
+
+                <label for="tablet-splitview-right-content">Right Content:</label>
+                <textarea id="tablet-splitview-right-content" rows="5"
+                          placeholder="Right side content..."></textarea>
+
+                <div class="control-group">
+                    <label for="tablet-split-ratio">Split Ratio:</label>
+                    <select id="tablet-split-ratio">
+                        <option value="50-50">50/50</option>
+                        <option value="70-30">70/30</option>
+                        <option value="30-70">30/70</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="tablet-browser-controls" class="content-controls" style="display: none;">
+                <label for="tablet-browser-url">URL:</label>
+                <input type="text" id="tablet-browser-url" value="https://example.com">
+
+                <label for="tablet-browser-content">Browser Content:</label>
+                <textarea id="tablet-browser-content" rows="8"
+                          placeholder="Enter webpage content or HTML..."></textarea>
+            </div>
+
+            <div id="tablet-custom-screen-controls" class="content-controls" style="display: none;">
+                <label for="tablet-custom-screen-content">Custom Screen Content:</label>
+                <textarea id="tablet-custom-screen-content" rows="8"
+                          placeholder="Enter custom content or HTML..."></textarea>
+            </div>
+
+            <div class="control-group">
+                <label>Status Bar Options:</label>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="tablet-show-battery" checked>
+                    <label for="tablet-show-battery">Show Battery</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="tablet-show-wifi" checked>
+                    <label for="tablet-show-wifi">Show WiFi</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="tablet-show-time" checked>
+                    <label for="tablet-show-time">Show Time</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="tablet-status-bar-style">Status Bar Style:</label>
+                <select id="tablet-status-bar-style">
                     <option value="light">Light</option>
                     <option value="dark">Dark</option>
                 </select>
@@ -262,6 +389,28 @@
                     </div>
                 </div>
                 <div class="smartphone-button home-button"></div>
+            </div>
+        </div>
+
+        <!-- Tablet Mockup -->
+        <div class="tablet-container" id="mockup-tablet" style="display: none;">
+            <div class="tablet-frame ipad landscape">
+                <div class="tablet-screen">
+                    <div class="tablet-status-bar">
+                        <div class="status-left">
+                            <span class="tablet-status-time">12:30</span>
+                        </div>
+                        <div class="status-right">
+                            <span class="tablet-status-wifi"></span>
+                            <span class="tablet-status-battery"></span>
+                        </div>
+                    </div>
+                    <div class="tablet-content" id="tablet-content">
+                        <!-- Tablet content will be inserted here -->
+                    </div>
+                </div>
+                <div class="tablet-button home-button"></div>
+                <div class="tablet-camera"></div>
             </div>
         </div>
     </div>

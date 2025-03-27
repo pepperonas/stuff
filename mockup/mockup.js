@@ -41,10 +41,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const statusBarStyle = document.getElementById('status-bar-style');
     const smartphoneContent = document.getElementById('smartphone-content');
 
+    // DOM elements for tablet mockup
+    const mockupTablet = document.getElementById('mockup-tablet');
+    const tabletModel = document.getElementById('tablet-model');
+    const tabletOrientation = document.getElementById('tablet-orientation');
+    const tabletColor = document.getElementById('tablet-color');
+    const tabletContentType = document.getElementById('tablet-content-type');
+    const tabletScreenshotControls = document.getElementById('tablet-screenshot-controls');
+    const tabletAppControls = document.getElementById('tablet-app-controls');
+    const tabletSplitviewControls = document.getElementById('tablet-splitview-controls');
+    const tabletBrowserControls = document.getElementById('tablet-browser-controls');
+    const tabletCustomScreenControls = document.getElementById('tablet-custom-screen-controls');
+    const tabletScreenshotUpload = document.getElementById('tablet-screenshot-upload');
+    const tabletAppTitle = document.getElementById('tablet-app-title');
+    const tabletAppContent = document.getElementById('tablet-app-content');
+    const tabletSplitviewLeftTitle = document.getElementById('tablet-splitview-left-title');
+    const tabletSplitviewLeftContent = document.getElementById('tablet-splitview-left-content');
+    const tabletSplitviewRightTitle = document.getElementById('tablet-splitview-right-title');
+    const tabletSplitviewRightContent = document.getElementById('tablet-splitview-right-content');
+    const tabletSplitRatio = document.getElementById('tablet-split-ratio');
+    const tabletBrowserUrl = document.getElementById('tablet-browser-url');
+    const tabletBrowserContent = document.getElementById('tablet-browser-content');
+    const tabletCustomScreenContent = document.getElementById('tablet-custom-screen-content');
+    const tabletShowBattery = document.getElementById('tablet-show-battery');
+    const tabletShowWifi = document.getElementById('tablet-show-wifi');
+    const tabletShowTime = document.getElementById('tablet-show-time');
+    const tabletStatusBarStyle = document.getElementById('tablet-status-bar-style');
+    const tabletContent = document.getElementById('tablet-content');
+
     // Mockup type selection
     const mockupTypeRadios = document.querySelectorAll('input[name="mockup-type"]');
     const terminalControls = document.getElementById('terminal-controls');
     const smartphoneControls = document.getElementById('smartphone-controls');
+    const tabletControls = document.getElementById('tablet-controls');
 
     // Custom background color elements
     const customBgColor = document.getElementById('custom-bg-color');
@@ -108,7 +137,7 @@ _)      \\.___.,|     .'
 
     // Mockup type selection
     mockupTypeRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
+        radio.addEventListener('change', function () {
             currentMockupType = this.value;
             toggleMockupType();
         });
@@ -144,22 +173,22 @@ _)      \\.___.,|     .'
     });
 
     // Phone model change
-    phoneModel.addEventListener('change', function() {
+    phoneModel.addEventListener('change', function () {
         updatePhoneModel();
     });
 
     // Phone color change
-    phoneColor.addEventListener('change', function() {
+    phoneColor.addEventListener('change', function () {
         updatePhoneColor();
     });
 
     // Screen content type change
-    screenContentType.addEventListener('change', function() {
+    screenContentType.addEventListener('change', function () {
         toggleScreenContentControls();
     });
 
     // Status bar style change
-    statusBarStyle.addEventListener('change', function() {
+    statusBarStyle.addEventListener('change', function () {
         updateStatusBarStyle();
     });
 
@@ -177,6 +206,36 @@ _)      \\.___.,|     .'
         applyTheme(this.value);
     });
 
+    // Tablet model change
+    tabletModel.addEventListener('change', function () {
+        updateTabletModel();
+    });
+
+    // Tablet orientation change
+    tabletOrientation.addEventListener('change', function () {
+        updateTabletOrientation();
+    });
+
+    // Tablet color change
+    tabletColor.addEventListener('change', function () {
+        updateTabletColor();
+    });
+
+    // Tablet content type change
+    tabletContentType.addEventListener('change', function () {
+        toggleTabletContentControls();
+    });
+
+    // Tablet status bar style change
+    tabletStatusBarStyle.addEventListener('change', function () {
+        updateTabletStatusBarStyle();
+    });
+
+    // Show/hide tablet status bar elements
+    tabletShowBattery.addEventListener('change', toggleTabletStatusBarElements);
+    tabletShowWifi.addEventListener('change', toggleTabletStatusBarElements);
+    tabletShowTime.addEventListener('change', toggleTabletStatusBarElements);
+
     // Update button
     updateButton.addEventListener('click', updateMockup);
 
@@ -185,18 +244,26 @@ _)      \\.___.,|     .'
 
     // ======= Functions =======
 
-    // Toggle between terminal and smartphone mockup
+    // Toggle between terminal, smartphone and tablet mockup
     function toggleMockupType() {
+        // Hide all mockups first
+        mockupTerminal.style.display = 'none';
+        mockupSmartphone.style.display = 'none';
+        mockupTablet.style.display = 'none';
+        terminalControls.style.display = 'none';
+        smartphoneControls.style.display = 'none';
+        tabletControls.style.display = 'none';
+
+        // Show the selected mockup
         if (currentMockupType === 'terminal') {
             mockupTerminal.style.display = 'flex';
-            mockupSmartphone.style.display = 'none';
             terminalControls.style.display = 'block';
-            smartphoneControls.style.display = 'none';
-        } else {
-            mockupTerminal.style.display = 'none';
+        } else if (currentMockupType === 'smartphone') {
             mockupSmartphone.style.display = 'flex';
-            terminalControls.style.display = 'none';
             smartphoneControls.style.display = 'block';
+        } else if (currentMockupType === 'tablet') {
+            mockupTablet.style.display = 'flex';
+            tabletControls.style.display = 'block';
         }
     }
 
@@ -217,6 +284,17 @@ _)      \\.___.,|     .'
         appControls.style.display = contentType === 'app' ? 'block' : 'none';
         browserControls.style.display = contentType === 'browser' ? 'block' : 'none';
         customScreenControls.style.display = contentType === 'custom' ? 'block' : 'none';
+    }
+
+    // Toggle tablet screen content controls
+    function toggleTabletContentControls() {
+        const contentType = tabletContentType.value;
+
+        tabletScreenshotControls.style.display = contentType === 'screenshot' ? 'block' : 'none';
+        tabletAppControls.style.display = contentType === 'app' ? 'block' : 'none';
+        tabletSplitviewControls.style.display = contentType === 'splitview' ? 'block' : 'none';
+        tabletBrowserControls.style.display = contentType === 'browser' ? 'block' : 'none';
+        tabletCustomScreenControls.style.display = contentType === 'custom' ? 'block' : 'none';
     }
 
     // Apply custom background color
@@ -306,10 +384,81 @@ _)      \\.___.,|     .'
         smartphoneFrame.classList.add(color);
     }
 
+    // Update tablet model
+    function updateTabletModel() {
+        const model = tabletModel.value;
+        const tabletFrame = document.querySelector('.tablet-frame');
+
+        // Remove any existing model classes
+        tabletFrame.classList.remove('ipad', 'ipad-pro', 'surface', 'galaxy-tab');
+
+        // Add selected model class
+        tabletFrame.classList.add(model);
+
+        // Add/remove home button and camera based on model
+        const homeButton = tabletFrame.querySelector('.home-button');
+        const camera = tabletFrame.querySelector('.tablet-camera');
+
+        // Remove existing elements first
+        if (homeButton) homeButton.remove();
+        if (camera) camera.remove();
+
+        // Add model-specific elements
+        if (model === 'ipad' || model === 'ipad-pro') {
+            // Add home button for iPad models
+            const homeButtonElement = document.createElement('div');
+            homeButtonElement.className = 'home-button';
+            tabletFrame.appendChild(homeButtonElement);
+
+            // Add camera
+            const cameraElement = document.createElement('div');
+            cameraElement.className = 'tablet-camera';
+            tabletFrame.appendChild(cameraElement);
+        } else if (model === 'surface') {
+            // Add camera for Surface
+            const cameraElement = document.createElement('div');
+            cameraElement.className = 'tablet-camera';
+            tabletFrame.appendChild(cameraElement);
+        }
+    }
+
+    // Update tablet orientation
+    function updateTabletOrientation() {
+        const orientation = tabletOrientation.value;
+        const tabletFrame = document.querySelector('.tablet-frame');
+
+        // Remove existing orientation classes
+        tabletFrame.classList.remove('landscape', 'portrait');
+
+        // Add selected orientation class
+        tabletFrame.classList.add(orientation);
+    }
+
+    // Update tablet color
+    function updateTabletColor() {
+        const color = tabletColor.value;
+        const tabletFrame = document.querySelector('.tablet-frame');
+
+        // Remove any existing color classes
+        tabletFrame.classList.remove('black', 'white', 'gold', 'silver', 'blue');
+
+        // Add selected color class
+        tabletFrame.classList.add(color);
+    }
+
     // Update status bar style
     function updateStatusBarStyle() {
         const style = statusBarStyle.value;
         const statusBar = document.querySelector('.smartphone-status-bar');
+
+        statusBar.classList.remove('status-bar-light', 'status-bar-dark');
+        statusBar.classList.add('status-bar-' + style);
+    }
+
+    // Update tablet status bar style
+    function updateTabletStatusBarStyle() {
+        const style = tabletStatusBarStyle.value;
+        const statusBar = document.querySelector('.tablet-status-bar');
 
         statusBar.classList.remove('status-bar-light', 'status-bar-dark');
         statusBar.classList.add('status-bar-' + style);
@@ -326,6 +475,17 @@ _)      \\.___.,|     .'
         wifiElement.style.display = showWifi.checked ? 'block' : 'none';
         signalElement.style.display = showSignal.checked ? 'block' : 'none';
         timeElement.style.display = showTime.checked ? 'block' : 'none';
+    }
+
+    // Toggle tablet status bar elements
+    function toggleTabletStatusBarElements() {
+        const batteryElement = document.querySelector('.tablet-status-battery');
+        const wifiElement = document.querySelector('.tablet-status-wifi');
+        const timeElement = document.querySelector('.tablet-status-time');
+
+        batteryElement.style.display = tabletShowBattery.checked ? 'block' : 'none';
+        wifiElement.style.display = tabletShowWifi.checked ? 'block' : 'none';
+        timeElement.style.display = tabletShowTime.checked ? 'block' : 'none';
     }
 
     // Insert text content into terminal
@@ -474,12 +634,125 @@ _)      \\.___.,|     .'
         smartphoneContent.innerHTML = customScreenContent.value || '<p>Custom content goes here</p>';
     }
 
+    // Insert screenshot into tablet
+    function insertTabletScreenshot() {
+        const file = tabletScreenshotUpload.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            tabletContent.innerHTML = '';
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.width = '100%';
+            img.style.height = 'auto';
+
+            tabletContent.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Insert app interface into tablet
+    function insertTabletAppInterface() {
+        tabletContent.innerHTML = '';
+
+        const appHeader = document.createElement('div');
+        appHeader.className = 'app-header';
+        appHeader.textContent = tabletAppTitle.value || 'Tablet App';
+
+        const appContentDiv = document.createElement('div');
+        appContentDiv.className = 'app-content';
+        appContentDiv.innerHTML = tabletAppContent.value || '<p>App content goes here</p>';
+
+        tabletContent.appendChild(appHeader);
+        tabletContent.appendChild(appContentDiv);
+    }
+
+    // Insert split view interface into tablet
+    function insertTabletSplitView() {
+        tabletContent.innerHTML = '';
+
+        const splitRatio = tabletSplitRatio.value;
+
+        const splitViewContainer = document.createElement('div');
+        splitViewContainer.className = 'split-view-container ratio-' + splitRatio;
+
+        // Left side
+        const leftView = document.createElement('div');
+        leftView.className = 'split-view-left';
+
+        const leftHeader = document.createElement('div');
+        leftHeader.className = 'app-header';
+        leftHeader.textContent = tabletSplitviewLeftTitle.value || 'Left App';
+
+        const leftContent = document.createElement('div');
+        leftContent.className = 'app-content';
+        leftContent.innerHTML = tabletSplitviewLeftContent.value || '<p>Left side content</p>';
+
+        leftView.appendChild(leftHeader);
+        leftView.appendChild(leftContent);
+
+        // Divider
+        const divider = document.createElement('div');
+        divider.className = 'split-view-divider';
+
+        // Right side
+        const rightView = document.createElement('div');
+        rightView.className = 'split-view-right';
+
+        const rightHeader = document.createElement('div');
+        rightHeader.className = 'app-header';
+        rightHeader.textContent = tabletSplitviewRightTitle.value || 'Right App';
+
+        const rightContent = document.createElement('div');
+        rightContent.className = 'app-content';
+        rightContent.innerHTML = tabletSplitviewRightContent.value || '<p>Right side content</p>';
+
+        rightView.appendChild(rightHeader);
+        rightView.appendChild(rightContent);
+
+        // Add to container
+        splitViewContainer.appendChild(leftView);
+        splitViewContainer.appendChild(divider);
+        splitViewContainer.appendChild(rightView);
+
+        tabletContent.appendChild(splitViewContainer);
+    }
+
+    // Insert browser interface into tablet
+    function insertTabletBrowserInterface() {
+        tabletContent.innerHTML = '';
+
+        const browserBar = document.createElement('div');
+        browserBar.className = 'browser-bar';
+
+        const addressBar = document.createElement('div');
+        addressBar.className = 'browser-address';
+        addressBar.textContent = tabletBrowserUrl.value || 'https://example.com';
+
+        const browserContentDiv = document.createElement('div');
+        browserContentDiv.className = 'browser-content';
+        browserContentDiv.innerHTML = tabletBrowserContent.value || '<p>Webpage content goes here</p>';
+
+        browserBar.appendChild(addressBar);
+        tabletContent.appendChild(browserBar);
+        tabletContent.appendChild(browserContentDiv);
+    }
+
+    // Insert custom content into tablet
+    function insertTabletCustomContent() {
+        tabletContent.innerHTML = tabletCustomScreenContent.value || '<p>Custom content goes here</p>';
+    }
+
     // Update the mockup preview
     function updateMockup() {
         if (currentMockupType === 'terminal') {
             updateTerminalMockup();
-        } else {
+        } else if (currentMockupType === 'smartphone') {
             updateSmartphoneMockup();
+        } else if (currentMockupType === 'tablet') {
+            updateTabletMockup();
         }
     }
 
@@ -541,10 +814,63 @@ _)      \\.___.,|     .'
         }
     }
 
+    // Update tablet mockup
+    function updateTabletMockup() {
+        updateTabletModel();
+        updateTabletOrientation();
+        updateTabletColor();
+        updateTabletStatusBarStyle();
+        toggleTabletStatusBarElements();
+
+        // Update tablet time
+        const timeElement = document.querySelector('.tablet-status-time');
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        timeElement.textContent = `${hours}:${minutes}`;
+
+        // Handle different content types
+        const contentType = tabletContentType.value;
+
+        switch (contentType) {
+            case 'screenshot':
+                insertTabletScreenshot();
+                break;
+            case 'app':
+                insertTabletAppInterface();
+                break;
+            case 'splitview':
+                insertTabletSplitView();
+                break;
+            case 'browser':
+                insertTabletBrowserInterface();
+                break;
+            case 'custom':
+                insertTabletCustomContent();
+                break;
+        }
+    }
+
     // Download mockup as image
     function downloadMockup() {
         // Determine which mockup to download
-        const targetElement = currentMockupType === 'terminal' ? mockupTerminal : mockupSmartphone;
+        let targetElement;
+        let filename;
+
+        switch (currentMockupType) {
+            case 'terminal':
+                targetElement = mockupTerminal;
+                filename = 'terminal-mockup.png';
+                break;
+            case 'smartphone':
+                targetElement = mockupSmartphone;
+                filename = 'smartphone-mockup.png';
+                break;
+            case 'tablet':
+                targetElement = mockupTablet;
+                filename = 'tablet-mockup.png';
+                break;
+        }
 
         // Use html2canvas to capture the mockup
         html2canvas(targetElement, {
@@ -554,7 +880,7 @@ _)      \\.___.,|     .'
         }).then(canvas => {
             // Create download link
             const link = document.createElement('a');
-            link.download = currentMockupType + '-mockup.png';
+            link.download = filename;
             link.href = canvas.toDataURL('image/png');
             link.click();
         });
@@ -563,5 +889,6 @@ _)      \\.___.,|     .'
     // Initial setup
     toggleContentControls();
     toggleScreenContentControls();
+    toggleTabletContentControls();
     updateMockup();
 });
