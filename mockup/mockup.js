@@ -150,19 +150,9 @@ _)      \\.___.,|     .'
         const text = customText.value;
         if (!text.trim()) return;
 
-        // Plain text with line breaks
-        const textDiv = document.createElement('div');
-        textDiv.className = 'command';
-
-        // Handle line breaks correctly
-        text.split('\n').forEach((line, index, array) => {
-            if (index > 0) {
-                textDiv.appendChild(document.createElement('br'));
-            }
-            textDiv.appendChild(document.createTextNode(line));
-        });
-
-        terminalOutput.appendChild(textDiv);
+        // Vereinfachte Methode mit innerHTML für zuverlässige Anzeige
+        const formattedText = text.replace(/\n/g, '<br>');
+        terminalOutput.innerHTML = `<div class="command">${formattedText}</div>`;
     }
 
     // Insert image content into terminal
