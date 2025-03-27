@@ -147,12 +147,54 @@ _)      \\.___.,|     .'
 
     // Insert text content into terminal
     function insertTextContent() {
-        const text = customText.value;
-        if (!text.trim()) return;
+        try {
+            // Text holen
+            var text = customText.value || "";
 
-        // Vereinfachte Methode mit innerHTML für zuverlässige Anzeige
-        const formattedText = text.replace(/\n/g, '<br>');
-        terminalOutput.innerHTML = `<div class="command">${formattedText}</div>`;
+            // Prüfen ob leer
+            if (!text.trim()) {
+                return;
+            }
+
+            // Terminal leeren mit altmodischer Methode
+            while (terminalOutput.firstChild) {
+                terminalOutput.removeChild(terminalOutput.firstChild);
+            }
+
+            // Text-Container erstellen
+            var textDiv = document.createElement("div");
+            textDiv.className = "command";
+
+            // Text mit einfacher Methode einfügen
+            // Mit älteren Browser kompatibel
+            var lines = text.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+                // Text für diese Zeile hinzufügen
+                var textNode = document.createTextNode(lines[i]);
+                textDiv.appendChild(textNode);
+
+                // Zeilenumbruch hinzufügen (außer für die letzte Zeile)
+                if (i < lines.length - 1) {
+                    var br = document.createElement("br");
+                    textDiv.appendChild(br);
+                }
+            }
+
+            // Zum Terminal hinzufügen
+            terminalOutput.appendChild(textDiv);
+
+            console.log("Text erfolgreich eingefügt");
+        } catch (error) {
+            // Fehler-Fallback: Direktes Einfügen
+            console.error("Fehler beim Einfügen des Texts:", error);
+            try {
+                terminalOutput.innerHTML = "<div class='command'>" +
+                    text.replace(/\n/g, "<br>").replace(/</g, "&lt;").replace(/>/g, "&gt;") +
+                    "</div>";
+            } catch (e) {
+                console.error("Auch Fallback fehlgeschlagen:", e);
+            }
+        }
     }
 
     // Insert image content into terminal
