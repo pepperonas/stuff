@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Mockup Generator">
+    <meta property="og:description" content="Einfach schnell tolle Mockups erstellen.">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="container">
+    <div class="controls-panel">
+        <h2>Mockup Generator</h2>
+
+        <div class="control-group">
+            <label for="terminal-title-input">Window Title:</label>
+            <input type="text" id="terminal-title-input" value="">
+        </div>
+
+        <div class="control-group">
+            <label for="prompt-input">Terminal Prompt:</label>
+            <input type="text" id="prompt-input" value="">
+        </div>
+
+        <div class="control-group">
+            <label for="content-type">Content Type:</label>
+            <select id="content-type">
+                <option value="text">Text Content</option>
+                <option value="image">Image</option>
+                <option value="ascii-art">ASCII Art</option>
+            </select>
+        </div>
+
+        <div id="text-controls" class="content-controls">
+            <label for="custom-text">Custom Text:</label>
+            <textarea id="custom-text" rows="8"
+                      placeholder="Enter custom text to display in the terminal..."></textarea>
+
+            <div class="text-format-controls">
+                <label>
+                    <input type="checkbox" id="text-as-output"> Format as command output
+                </label>
+                <label>
+                    <input type="checkbox" id="show-commands"> Show commands before output
+                </label>
+            </div>
+        </div>
+
+        <div id="image-controls" class="content-controls" style="display: none;">
+            <label for="image-upload">Upload Image:</label>
+            <input type="file" id="image-upload" accept="image/*">
+            <div class="image-options">
+                <label for="image-width">Width (%):</label>
+                <input type="range" id="image-width" min="10" max="100" value="80">
+                <label for="image-center">
+                    <input type="checkbox" id="image-center" checked> Center image
+                </label>
+            </div>
+        </div>
+
+        <div id="ascii-controls" class="content-controls" style="display: none;">
+            <label for="ascii-selection">Select ASCII Art:</label>
+            <select id="ascii-selection">
+                <option value="tux">Tux (Linux Penguin)</option>
+                <option value="computer">Computer</option>
+                <option value="linux">Linux Logo</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="theme-selector">Terminal Theme:</label>
+            <select id="theme-selector">
+                <optgroup label="Dark Themes">
+                    <option value="nord">Nord (Default)</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="solarized-dark">Solarized Dark</option>
+                    <option value="github-dark">GitHub Dark</option>
+                    <option value="dracula">Dracula</option>
+                </optgroup>
+                <optgroup label="Light Themes">
+                    <option value="light">Light</option>
+                    <option value="github-light">GitHub Light</option>
+                    <option value="solarized-light">Solarized Light</option>
+                    <option value="atom-light">Atom Light</option>
+                    <option value="xcode-light">Xcode Light</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="control-group custom-bg-color">
+            <label for="custom-bg-color">Custom background color:</label>
+            <div class="color-input-container">
+                <input type="text" id="custom-bg-color" placeholder="#000000" maxlength="7">
+                <input type="color" id="color-picker" value="#000000">
+                <button id="apply-bg-color">Apply</button>
+            </div>
+            <div class="checkbox-option">
+                <input type="checkbox" id="use-custom-bg">
+                <label for="use-custom-bg">Use custom background color</label>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="update-mockup">Update Mockup</button>
+            <button id="download-mockup">Download Mockup</button>
+        </div>
+    </div>
+
+    <div class="mockup-preview">
+        <div class="terminal-container" id="mockup-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button close"></div>
+                    <div class="terminal-button minimize"></div>
+                    <div class="terminal-button maximize"></div>
+                </div>
+                <div class="terminal-title" id="display-title">Terminal Mockup</div>
+            </div>
+            <div class="terminal-body">
+                <div id="terminal-output">
+                    <!-- Terminal content will be inserted here -->
+                </div>
+                <div class="input-line">
+                    <span class="prompt" id="display-prompt">user@linux:~$</span>
+                    <!--                    <span class="cursor"></span>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer">
+    Made with ❤️ by Martin Pfeffer
+</footer>
+
+<script src="mockup.js"></script>
+</body>
+</html>
