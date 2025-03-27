@@ -916,7 +916,7 @@ body {
     position: relative;
     width: 300px;
     height: 600px;
-    background-color: #000;
+    background-color: #212121;
     border-radius: 40px;
     padding: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -996,7 +996,7 @@ body {
 /* Samsung Galaxy Specific Styles */
 .smartphone-frame.samsung {
     padding: 10px;
-    background-color: #000;
+    background-color: #212121;
     border-radius: 35px;
 }
 
@@ -1374,7 +1374,7 @@ body {
     position: relative;
     width: 300px;
     height: 600px;
-    background-color: #000;
+    background-color: #212121;
     border-radius: 40px;
     padding: 10px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
@@ -1454,7 +1454,7 @@ body {
 /* Samsung Galaxy Specific Styles */
 .smartphone-frame.samsung {
     padding: 10px;
-    background-color: #000;
+    background-color: #212121;
     border-radius: 35px;
 }
 
@@ -1592,7 +1592,7 @@ body {
 
 .tablet-frame {
     position: relative;
-    background-color: #000;
+    background-color: #212121;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     transition: all 0.5s ease;
@@ -1763,7 +1763,7 @@ body {
 
 /* Galaxy Tab Specific Styles */
 .tablet-frame.galaxy-tab {
-    background-color: #000;
+    background-color: #212121;
     padding: 15px;
     border-radius: 20px;
 }
