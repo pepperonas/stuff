@@ -246,10 +246,15 @@ _)      \\.___.,|     .'
 
     // Toggle between terminal, smartphone and tablet mockup
     function toggleMockupType() {
+        // Store scroll position before changing
+        const scrollPosition = window.scrollY;
+
         // Hide all mockups first
         mockupTerminal.style.display = 'none';
         mockupSmartphone.style.display = 'none';
         mockupTablet.style.display = 'none';
+
+        // Hide all control sections, but don't change the containing controls-panel
         terminalControls.style.display = 'none';
         smartphoneControls.style.display = 'none';
         tabletControls.style.display = 'none';
@@ -265,6 +270,9 @@ _)      \\.___.,|     .'
             mockupTablet.style.display = 'flex';
             tabletControls.style.display = 'block';
         }
+
+        // Restore scroll position
+        window.scrollTo(0, scrollPosition);
     }
 
     // Toggle terminal content controls based on selected type
