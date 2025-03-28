@@ -81,6 +81,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const applyBgColor = document.getElementById('apply-bg-color');
     const useCustomBg = document.getElementById('use-custom-bg');
 
+    // DOM elements for smartphone custom background
+    const smartphoneCustomBgColor = document.getElementById('smartphone-custom-bg-color');
+    const smartphoneColorPicker = document.getElementById('smartphone-color-picker');
+    const smartphoneApplyBgColor = document.getElementById('smartphone-apply-bg-color');
+    const smartphoneUseCustomBg = document.getElementById('smartphone-use-custom-bg');
+
+// DOM elements for tablet custom background
+    const tabletCustomBgColor = document.getElementById('tablet-custom-bg-color');
+    const tabletColorPicker = document.getElementById('tablet-color-picker');
+    const tabletApplyBgColor = document.getElementById('tablet-apply-bg-color');
+    const tabletUseCustomBg = document.getElementById('tablet-use-custom-bg');
+
     // ASCII art collection
     const asciiArt = {
         tux: `
@@ -241,6 +253,94 @@ _)      \\.___.,|     .'
 
     // Download button
     downloadButton.addEventListener('click', downloadMockup);
+
+    // Smartphone color picker sync
+    smartphoneColorPicker.addEventListener('input', function () {
+        smartphoneCustomBgColor.value = this.value;
+    });
+
+    smartphoneCustomBgColor.addEventListener('input', function () {
+        // Validate hex color
+        if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+            smartphoneColorPicker.value = this.value;
+        }
+    });
+
+// Apply smartphone custom background color
+    smartphoneApplyBgColor.addEventListener('click', function () {
+        if (smartphoneUseCustomBg.checked) {
+            applySmartphoneCustomBgColor();
+        }
+    });
+
+// Toggle smartphone custom background color
+    smartphoneUseCustomBg.addEventListener('change', function () {
+        if (this.checked) {
+            applySmartphoneCustomBgColor();
+        } else {
+            // Reset to default
+            document.querySelector('.smartphone-content').style.backgroundColor = '';
+        }
+    });
+
+// Tablet color picker sync
+    tabletColorPicker.addEventListener('input', function () {
+        tabletCustomBgColor.value = this.value;
+    });
+
+    tabletCustomBgColor.addEventListener('input', function () {
+        // Validate hex color
+        if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+            tabletColorPicker.value = this.value;
+        }
+    });
+
+// Apply tablet custom background color
+    tabletApplyBgColor.addEventListener('click', function () {
+        if (tabletUseCustomBg.checked) {
+            applyTabletCustomBgColor();
+        }
+    });
+
+// Toggle tablet custom background color
+    tabletUseCustomBg.addEventListener('change', function () {
+        if (this.checked) {
+            applyTabletCustomBgColor();
+        } else {
+            // Reset to default
+            document.querySelector('.tablet-content').style.backgroundColor = '';
+        }
+    });
+
+// Apply smartphone custom background color
+    function applySmartphoneCustomBgColor() {
+        let color = smartphoneCustomBgColor.value;
+
+        // Validate hex color, default to white if invalid
+        if (!/^#[0-9A-F]{6}$/i.test(color)) {
+            color = '#ffffff';
+            smartphoneCustomBgColor.value = color;
+            smartphoneColorPicker.value = color;
+        }
+
+        // Apply color to smartphone content
+        document.querySelector('.smartphone-content').style.backgroundColor = color;
+    }
+
+// Apply tablet custom background color
+    function applyTabletCustomBgColor() {
+        let color = tabletCustomBgColor.value;
+
+        // Validate hex color, default to white if invalid
+        if (!/^#[0-9A-F]{6}$/i.test(color)) {
+            color = '#ffffff';
+            tabletCustomBgColor.value = color;
+            tabletColorPicker.value = color;
+        }
+
+        // Apply color to tablet content
+        document.querySelector('.tablet-content').style.backgroundColor = color;
+    }
 
     // ======= Functions =======
 
@@ -627,22 +727,33 @@ _)      \\.___.,|     .'
         }
     }
 
-    // Insert image content into terminal
+    // Enhanced insertImageContent function for terminal mockup
     function insertImageContent() {
         const file = imageUpload.files[0];
         if (!file) return;
 
         const reader = new FileReader();
         reader.onload = function (e) {
+            // Clear previous content
+            terminalOutput.innerHTML = '';
+
             const imageContainer = document.createElement('div');
             imageContainer.className = 'terminal-image';
+            imageContainer.style.width = '100%';
             if (imageCenter.checked) {
                 imageContainer.style.textAlign = 'center';
             }
 
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.style.maxWidth = imageWidth.value + '%';
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.objectFit = 'contain';
+
+            // Add onload handler to ensure image is properly loaded before display
+            img.onload = function () {
+                console.log("Terminal image loaded with dimensions:", img.naturalWidth, "x", img.naturalHeight);
+            };
 
             imageContainer.appendChild(img);
             terminalOutput.appendChild(imageContainer);
@@ -661,7 +772,7 @@ _)      \\.___.,|     .'
         terminalOutput.appendChild(artDiv);
     }
 
-    // Insert screenshot into smartphone
+    // Enhanced insertScreenshot function for smartphone mockup
     function insertScreenshot() {
         const file = screenshotUpload.files[0];
         if (!file) return;
@@ -670,12 +781,28 @@ _)      \\.___.,|     .'
         reader.onload = function (e) {
             smartphoneContent.innerHTML = '';
 
+            // Create a container to properly center and size the image
+            const imgContainer = document.createElement('div');
+            imgContainer.style.width = '100%';
+            imgContainer.style.height = '100%';
+            imgContainer.style.display = 'flex';
+            imgContainer.style.alignItems = 'center';
+            imgContainer.style.justifyContent = 'center';
+
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.style.width = '100%';
-            img.style.height = 'auto';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            img.style.display = 'block';
 
-            smartphoneContent.appendChild(img);
+            // Add onload handler to ensure image is properly loaded
+            img.onload = function () {
+                console.log("Smartphone image loaded with dimensions:", img.naturalWidth, "x", img.naturalHeight);
+            };
+
+            imgContainer.appendChild(img);
+            smartphoneContent.appendChild(imgContainer);
         };
         reader.readAsDataURL(file);
     }
@@ -721,7 +848,7 @@ _)      \\.___.,|     .'
         smartphoneContent.innerHTML = customScreenContent.value || '<p>Custom content goes here</p>';
     }
 
-    // Insert screenshot into tablet
+    // Enhanced insertTabletScreenshot function for tablet mockup
     function insertTabletScreenshot() {
         const file = tabletScreenshotUpload.files[0];
         if (!file) return;
@@ -730,12 +857,28 @@ _)      \\.___.,|     .'
         reader.onload = function (e) {
             tabletContent.innerHTML = '';
 
+            // Create a container to properly center and size the image
+            const imgContainer = document.createElement('div');
+            imgContainer.style.width = '100%';
+            imgContainer.style.height = '100%';
+            imgContainer.style.display = 'flex';
+            imgContainer.style.alignItems = 'center';
+            imgContainer.style.justifyContent = 'center';
+
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.style.width = '100%';
-            img.style.height = 'auto';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            img.style.display = 'block';
 
-            tabletContent.appendChild(img);
+            // Add onload handler to ensure image is properly loaded
+            img.onload = function () {
+                console.log("Tablet image loaded with dimensions:", img.naturalWidth, "x", img.naturalHeight);
+            };
+
+            imgContainer.appendChild(img);
+            tabletContent.appendChild(imgContainer);
         };
         reader.readAsDataURL(file);
     }
@@ -882,6 +1025,11 @@ _)      \\.___.,|     .'
         const minutes = now.getMinutes().toString().padStart(2, '0');
         timeElement.textContent = `${hours}:${minutes}`;
 
+        // Apply custom background if enabled
+        if (smartphoneUseCustomBg && smartphoneUseCustomBg.checked) {
+            applySmartphoneCustomBgColor();
+        }
+
         // Handle different content types
         const contentType = screenContentType.value;
 
@@ -915,6 +1063,11 @@ _)      \\.___.,|     .'
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         timeElement.textContent = `${hours}:${minutes}`;
+
+        // Apply custom background if enabled
+        if (tabletUseCustomBg && tabletUseCustomBg.checked) {
+            applyTabletCustomBgColor();
+        }
 
         // Handle different content types
         const contentType = tabletContentType.value;
