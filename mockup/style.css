@@ -935,7 +935,7 @@ body {
 .smartphone-content {
     width: 100%;
     height: calc(100% - 30px);
-    margin-top: 30px;
+    margin-top: 0px;
     overflow-y: auto;
     background-color: #fff;
 }
@@ -1393,7 +1393,7 @@ body {
 .smartphone-content {
     width: 100%;
     height: calc(100% - 30px);
-    margin-top: 30px;
+    margin-top: 0px;
     overflow-y: auto;
     background-color: #fff;
 }
@@ -1625,7 +1625,7 @@ body {
 .tablet-content {
     width: 100%;
     height: calc(100% - 30px);
-    margin-top: 30px;
+    margin-top: 0px;
     overflow-y: auto;
     background-color: #fff;
 }
