@@ -226,6 +226,7 @@ _)      \\.___.,|     .'
     // Tablet orientation change
     tabletOrientation.addEventListener('change', function () {
         updateTabletOrientation();
+        updateTabletDimensions(); // Update dimensions text when orientation changes
     });
 
     // Tablet color change
@@ -354,34 +355,50 @@ _)      \\.___.,|     .'
         mockupSmartphone.style.display = 'none';
         mockupTablet.style.display = 'none';
 
-        // Alle Steuerelemente ausblenden (mit style.display statt classList)
+        // Alle Dimensionstexte ausblenden
+        document.getElementById('terminal-dimensions').style.display = 'none';
+        document.getElementById('smartphone-dimensions').style.display = 'none';
+        document.getElementById('tablet-dimensions').style.display = 'none';
+
+        // Alle Steuerelemente ausblenden
         terminalControls.style.display = 'none';
         smartphoneControls.style.display = 'none';
         tabletControls.style.display = 'none';
 
-        // Jetzt das ausgewählte Mockup und dessen Steuerelemente anzeigen
+        // Jetzt das ausgewählte Mockup, dessen Steuerelemente und Dimensionstext anzeigen
         if (currentMockupType === 'terminal') {
             mockupTerminal.style.display = 'flex';
-            terminalControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            document.getElementById('terminal-dimensions').style.display = 'block';
+            terminalControls.style.display = 'block';
             console.log("Terminal-Modus aktiviert");
         } else if (currentMockupType === 'smartphone') {
             mockupSmartphone.style.display = 'flex';
-            smartphoneControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            document.getElementById('smartphone-dimensions').style.display = 'block';
+            smartphoneControls.style.display = 'block';
             console.log("Smartphone-Modus aktiviert");
-
-            // Smartphone-spezifische Controls überprüfen
-            toggleScreenContentControls(); // Stellt sicher, dass die richtigen Unterkontrollen angezeigt werden
+            toggleScreenContentControls();
         } else if (currentMockupType === 'tablet') {
             mockupTablet.style.display = 'flex';
-            tabletControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            document.getElementById('tablet-dimensions').style.display = 'block';
+            tabletControls.style.display = 'block';
             console.log("Tablet-Modus aktiviert");
-
-            // Tablet-spezifische Controls überprüfen
-            toggleTabletContentControls(); // Stellt sicher, dass die richtigen Unterkontrollen angezeigt werden
+            toggleTabletContentControls();
+            updateTabletDimensions(); // Update dimensions for current orientation
         }
 
         // Scrollposition wiederherstellen
         window.scrollTo(0, scrollPosition);
+    }
+
+    function updateTabletDimensions() {
+        const orientation = document.getElementById('tablet-orientation').value;
+        const tabletSizeText = document.getElementById('tablet-size-text');
+
+        if (orientation === 'landscape') {
+            tabletSizeText.textContent = '770 × 570 px';
+        } else { // portrait
+            tabletSizeText.textContent = '570 × 770 px';
+        }
     }
 
     function initializeFixedPanel() {

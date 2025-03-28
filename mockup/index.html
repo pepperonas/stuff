@@ -224,7 +224,8 @@
             <div class="control-group custom-bg-color">
                 <label for="smartphone-custom-bg-color">Custom background color:</label>
                 <div class="color-input-container">
-                    <input type="text" id="smartphone-custom-bg-color" placeholder="#ffffff" maxlength="7">
+                    <input type="text" id="smartphone-custom-bg-color" placeholder="#ffffff"
+                           maxlength="7">
                     <input type="color" id="smartphone-color-picker" value="#ffffff">
                     <button id="smartphone-apply-bg-color">Apply</button>
                 </div>
@@ -358,7 +359,8 @@
             <div class="control-group custom-bg-color">
                 <label for="tablet-custom-bg-color">Custom background color:</label>
                 <div class="color-input-container">
-                    <input type="text" id="tablet-custom-bg-color" placeholder="#ffffff" maxlength="7">
+                    <input type="text" id="tablet-custom-bg-color" placeholder="#ffffff"
+                           maxlength="7">
                     <input type="color" id="tablet-color-picker" value="#ffffff">
                     <button id="tablet-apply-bg-color">Apply</button>
                 </div>
@@ -377,67 +379,82 @@
 
     <div class="mockup-preview">
         <!-- Terminal Mockup -->
-        <div class="terminal-container" id="mockup-terminal">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-button close"></div>
-                    <div class="terminal-button minimize"></div>
-                    <div class="terminal-button maximize"></div>
+        <div class="mockup-device-container">
+            <div class="terminal-container" id="mockup-terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <div class="terminal-button close"></div>
+                        <div class="terminal-button minimize"></div>
+                        <div class="terminal-button maximize"></div>
+                    </div>
+                    <div class="terminal-title" id="display-title">Terminal Mockup</div>
                 </div>
-                <div class="terminal-title" id="display-title">Terminal Mockup</div>
+                <div class="terminal-body">
+                    <div id="terminal-output">
+                        <!-- Terminal content will be inserted here -->
+                    </div>
+                    <div class="input-line">
+                        <span class="prompt" id="display-prompt">user@linux:~$</span>
+                    </div>
+                </div>
             </div>
-            <div class="terminal-body">
-                <div id="terminal-output">
-                    <!-- Terminal content will be inserted here -->
-                </div>
-                <div class="input-line">
-                    <span class="prompt" id="display-prompt">user@linux:~$</span>
-                </div>
+            <div class="dimension-info" id="terminal-dimensions">Optimal image size: 760 × 400 px
             </div>
         </div>
 
         <!-- Smartphone Mockup -->
-        <div class="smartphone-container" id="mockup-smartphone" style="display: none;">
-            <div class="smartphone-frame iphone">
-                <div class="smartphone-screen">
-                    <div class="smartphone-notch"></div>
-                    <div class="smartphone-status-bar">
-                        <div class="status-left">
-                            <span class="status-time">12:30</span>
+        <div class="mockup-device-container">
+            <div class="smartphone-container" id="mockup-smartphone" style="display: none;">
+                <div class="smartphone-frame iphone">
+                    <div class="smartphone-screen">
+                        <div class="smartphone-notch"></div>
+                        <div class="smartphone-status-bar">
+                            <div class="status-left">
+                                <span class="status-time">12:30</span>
+                            </div>
+                            <div class="status-right">
+                                <span class="status-signal"></span>
+                                <span class="status-wifi"></span>
+                                <span class="status-battery"></span>
+                            </div>
                         </div>
-                        <div class="status-right">
-                            <span class="status-signal"></span>
-                            <span class="status-wifi"></span>
-                            <span class="status-battery"></span>
+                        <div class="smartphone-content" id="smartphone-content">
+                            <!-- Smartphone content will be inserted here -->
                         </div>
                     </div>
-                    <div class="smartphone-content" id="smartphone-content">
-                        <!-- Smartphone content will be inserted here -->
-                    </div>
+                    <div class="smartphone-button home-button"></div>
                 </div>
-                <div class="smartphone-button home-button"></div>
+            </div>
+            <div class="dimension-info" id="smartphone-dimensions" style="display: none;">Optimal
+                image
+                size: 280 × 500 px
             </div>
         </div>
 
         <!-- Tablet Mockup -->
-        <div class="tablet-container" id="mockup-tablet" style="display: none;">
-            <div class="tablet-frame ipad landscape">
-                <div class="tablet-screen">
-                    <div class="tablet-status-bar">
-                        <div class="status-left">
-                            <span class="tablet-status-time">12:30</span>
+        <div class="mockup-device-container">
+            <div class="tablet-container" id="mockup-tablet" style="display: none;">
+                <div class="tablet-frame ipad landscape">
+                    <div class="tablet-screen">
+                        <div class="tablet-status-bar">
+                            <div class="status-left">
+                                <span class="tablet-status-time">12:30</span>
+                            </div>
+                            <div class="status-right">
+                                <span class="tablet-status-wifi"></span>
+                                <span class="tablet-status-battery"></span>
+                            </div>
                         </div>
-                        <div class="status-right">
-                            <span class="tablet-status-wifi"></span>
-                            <span class="tablet-status-battery"></span>
+                        <div class="tablet-content" id="tablet-content">
+                            <!-- Tablet content will be inserted here -->
                         </div>
                     </div>
-                    <div class="tablet-content" id="tablet-content">
-                        <!-- Tablet content will be inserted here -->
-                    </div>
+                    <div class="tablet-button home-button"></div>
+                    <div class="tablet-camera"></div>
                 </div>
-                <div class="tablet-button home-button"></div>
-                <div class="tablet-camera"></div>
+            </div>
+            <div class="dimension-info" id="tablet-dimensions" style="display: none;">
+                Optimal image size: <span id="tablet-size-text">770 × 570 px</span>
             </div>
         </div>
     </div>
