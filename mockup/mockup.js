@@ -246,33 +246,71 @@ _)      \\.___.,|     .'
 
     // Toggle between terminal, smartphone and tablet mockup
     function toggleMockupType() {
-        // Store scroll position before changing
+        // Scrollposition merken
         const scrollPosition = window.scrollY;
 
-        // Hide all mockups first
+        // Alle Mockups ausblenden
         mockupTerminal.style.display = 'none';
         mockupSmartphone.style.display = 'none';
         mockupTablet.style.display = 'none';
 
-        // Hide all control sections, but don't change the containing controls-panel
+        // Alle Steuerelemente ausblenden (mit style.display statt classList)
         terminalControls.style.display = 'none';
         smartphoneControls.style.display = 'none';
         tabletControls.style.display = 'none';
 
-        // Show the selected mockup
+        // Jetzt das ausgewählte Mockup und dessen Steuerelemente anzeigen
         if (currentMockupType === 'terminal') {
             mockupTerminal.style.display = 'flex';
-            terminalControls.style.display = 'block';
+            terminalControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            console.log("Terminal-Modus aktiviert");
         } else if (currentMockupType === 'smartphone') {
             mockupSmartphone.style.display = 'flex';
-            smartphoneControls.style.display = 'block';
+            smartphoneControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            console.log("Smartphone-Modus aktiviert");
+
+            // Smartphone-spezifische Controls überprüfen
+            toggleScreenContentControls(); // Stellt sicher, dass die richtigen Unterkontrollen angezeigt werden
         } else if (currentMockupType === 'tablet') {
             mockupTablet.style.display = 'flex';
-            tabletControls.style.display = 'block';
+            tabletControls.style.display = 'block'; // Direktes Setzen von display statt der Klasse
+            console.log("Tablet-Modus aktiviert");
+
+            // Tablet-spezifische Controls überprüfen
+            toggleTabletContentControls(); // Stellt sicher, dass die richtigen Unterkontrollen angezeigt werden
         }
 
-        // Restore scroll position
+        // Scrollposition wiederherstellen
         window.scrollTo(0, scrollPosition);
+    }
+
+    function initializeFixedPanel() {
+        // Hide all controls
+        terminalControls.style.display = 'none';
+        smartphoneControls.style.display = 'none';
+        tabletControls.style.display = 'none';
+
+        // Activate terminal as default
+        terminalControls.style.display = 'block';
+
+        // Keep original English button text instead of translating to German
+        if (document.getElementById('update-mockup')) {
+            document.getElementById('update-mockup').textContent = 'Update Mockup';
+        }
+
+        if (document.getElementById('download-mockup')) {
+            document.getElementById('download-mockup').textContent = 'Download Mockup';
+        }
+
+        // Keep original English dropdown options instead of translating to German
+        const contentTypeSelect = document.getElementById('content-type');
+        if (contentTypeSelect) {
+            Array.from(contentTypeSelect.options).forEach(option => {
+                if (option.value === 'text') option.textContent = 'Text';
+                if (option.value === 'image') option.textContent = 'Image';
+                if (option.value === 'ascii-art') option.textContent = 'ASCII Art';
+            });
+        }
     }
 
     // Toggle terminal content controls based on selected type
@@ -284,25 +322,66 @@ _)      \\.___.,|     .'
         asciiControls.style.display = contentType === 'ascii-art' ? 'block' : 'none';
     }
 
-    // Toggle smartphone screen content controls
+    // Verbesserte toggleScreenContentControls-Funktion
     function toggleScreenContentControls() {
         const contentType = screenContentType.value;
 
-        screenshotControls.style.display = contentType === 'screenshot' ? 'block' : 'none';
-        appControls.style.display = contentType === 'app' ? 'block' : 'none';
-        browserControls.style.display = contentType === 'browser' ? 'block' : 'none';
-        customScreenControls.style.display = contentType === 'custom' ? 'block' : 'none';
+        console.log("Smartphone Content-Typ geändert zu:", contentType);
+
+        // Alle Content-Controls ausblenden
+        if (screenshotControls) screenshotControls.style.display = 'none';
+        if (appControls) appControls.style.display = 'none';
+        if (browserControls) browserControls.style.display = 'none';
+        if (customScreenControls) customScreenControls.style.display = 'none';
+
+        // Ausgewählte Content-Controls anzeigen
+        switch (contentType) {
+            case 'screenshot':
+                if (screenshotControls) screenshotControls.style.display = 'block';
+                break;
+            case 'app':
+                if (appControls) appControls.style.display = 'block';
+                break;
+            case 'browser':
+                if (browserControls) browserControls.style.display = 'block';
+                break;
+            case 'custom':
+                if (customScreenControls) customScreenControls.style.display = 'block';
+                break;
+        }
     }
 
-    // Toggle tablet screen content controls
+// Verbesserte toggleTabletContentControls-Funktion
     function toggleTabletContentControls() {
         const contentType = tabletContentType.value;
 
-        tabletScreenshotControls.style.display = contentType === 'screenshot' ? 'block' : 'none';
-        tabletAppControls.style.display = contentType === 'app' ? 'block' : 'none';
-        tabletSplitviewControls.style.display = contentType === 'splitview' ? 'block' : 'none';
-        tabletBrowserControls.style.display = contentType === 'browser' ? 'block' : 'none';
-        tabletCustomScreenControls.style.display = contentType === 'custom' ? 'block' : 'none';
+        console.log("Tablet Content-Typ geändert zu:", contentType);
+
+        // Alle Content-Controls ausblenden
+        if (tabletScreenshotControls) tabletScreenshotControls.style.display = 'none';
+        if (tabletAppControls) tabletAppControls.style.display = 'none';
+        if (tabletSplitviewControls) tabletSplitviewControls.style.display = 'none';
+        if (tabletBrowserControls) tabletBrowserControls.style.display = 'none';
+        if (tabletCustomScreenControls) tabletCustomScreenControls.style.display = 'none';
+
+        // Ausgewählte Content-Controls anzeigen
+        switch (contentType) {
+            case 'screenshot':
+                if (tabletScreenshotControls) tabletScreenshotControls.style.display = 'block';
+                break;
+            case 'app':
+                if (tabletAppControls) tabletAppControls.style.display = 'block';
+                break;
+            case 'splitview':
+                if (tabletSplitviewControls) tabletSplitviewControls.style.display = 'block';
+                break;
+            case 'browser':
+                if (tabletBrowserControls) tabletBrowserControls.style.display = 'block';
+                break;
+            case 'custom':
+                if (tabletCustomScreenControls) tabletCustomScreenControls.style.display = 'block';
+                break;
+        }
     }
 
     // Apply custom background color
@@ -899,4 +978,6 @@ _)      \\.___.,|     .'
     toggleScreenContentControls();
     toggleTabletContentControls();
     updateMockup();
+
+    initializeFixedPanel();
 });
