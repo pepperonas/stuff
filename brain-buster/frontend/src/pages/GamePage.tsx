@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {AnimatePresence, motion} from 'framer-motion'
 import {useNavigate} from 'react-router-dom'
 import Card from '../components/ui/Card'
@@ -14,6 +14,14 @@ const GamePage = () => {
     const [isCountingDown, setIsCountingDown] = useState(false)
     const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
     const [difficultyFilter, setDifficultyFilter] = useState<'easy' | 'medium' | 'hard' | null>(null)
+
+    // Debug state values
+    useEffect(() => {
+        console.log('GamePage state:', state);
+        console.log('Questions available:', state.questions.length);
+        console.log('Current question index:', state.currentQuestionIndex);
+        console.log('Game status:', state.gameStatus);
+    }, [state]);
 
     // Spiel starten
     const handleStartGame = () => {
@@ -84,8 +92,6 @@ const GamePage = () => {
     }
 
     // Funktion, die bei "next" in der QuestionCard aufgerufen wird
-    // Diese Funktion wird nicht verwendet, aber muss übergeben werden,
-    // da die QuestionCard sie als Prop erwartet
     const handleNextQuestion = () => {
         // Die tatsächliche Logik für das Weiterschalten wird in QuestionCard verwaltet
         console.log('Next Question (nicht verwendet)')
@@ -180,11 +186,28 @@ const GamePage = () => {
                             </div>
                         </div>
 
-                        {state.currentQuestionIndex < state.questions.length && (
+                        {state.currentQuestionIndex < state.questions.length && state.questions.length > 0 && (
                             <QuestionCard
                                 question={state.questions[state.currentQuestionIndex]}
                                 onNext={handleNextQuestion}
                             />
+                        )}
+
+                        {/* Fallback if no questions are available */}
+                        {state.questions.length === 0 && (
+                            <Card>
+                                <div className="text-center py-6">
+                                    <p className="text-lg text-red-400">Fehler: Keine Fragen
+                                        verfügbar</p>
+                                    <Button
+                                        className="mt-4"
+                                        variant="outline"
+                                        onClick={handleResetGame}
+                                    >
+                                        Zurück zum Start
+                                    </Button>
+                                </div>
+                            </Card>
                         )}
                     </motion.div>
                 </AnimatePresence>

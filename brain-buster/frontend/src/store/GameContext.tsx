@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useContext, useReducer } from 'react'
+import { createContext, ReactNode, useCallback, useContext, useReducer, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 import { GameSession, GameState, GameStats, Question } from '../types'
@@ -25,7 +25,7 @@ const initialStats: GameStats = {
 const initialState: GameState = {
     stats: initialStats,
     currentSession: null,
-    questions: [],
+    questions: sampleQuestions, // Load sample questions immediately
     currentQuestionIndex: 0,
     gameMode: 'solo',
     gameStatus: 'idle',
@@ -42,7 +42,7 @@ const initialState: GameState = {
 type GameAction =
     | { type: 'INIT_GAME_STATE'; payload: Partial<GameState> }
     | { type: 'START_GAME'; payload: { mode: 'solo' | 'multiplayer'; questions: Question[] } }
-    | { type: 'ANSWER_QUESTION'; payload: { answer: number } } // questionId entfernt
+    | { type: 'ANSWER_QUESTION'; payload: { answer: number } } // questionId Parameter entfernt
     | { type: 'NEXT_QUESTION' }
     | { type: 'END_GAME'; payload: { result: 'win' | 'loss' | 'draw' } }
     | { type: 'RESET_GAME' }
@@ -60,6 +60,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
             return {
                 ...state,
                 ...action.payload,
+                questions: action.payload.questions || sampleQuestions, // Ensure questions are loaded
             }
 
         case 'START_GAME':
@@ -178,13 +179,14 @@ function gameReducer(state: GameState, action: GameAction): GameState {
             return {
                 ...state,
                 currentSession: null,
-                questions: [],
                 currentQuestionIndex: 0,
                 gameStatus: 'idle',
                 multiplayer: {
                     ...state.multiplayer,
                     opponentScore: 0,
                 },
+                // Keep the questions array intact
+                questions: state.questions.length > 0 ? state.questions : sampleQuestions,
             }
 
         case 'SET_MULTIPLAYER_STATUS':
@@ -243,27 +245,45 @@ const GameContext = createContext<GameContextType | undefined>(undefined)
 export const GameProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(gameReducer, initialState)
 
+    // Ensure sample questions are available on initial load
+    useEffect(() => {
+        if (state.questions.length === 0) {
+            dispatch({
+                type: 'INIT_GAME_STATE',
+                payload: { questions: sampleQuestions }
+            });
+        }
+    }, []);
+
     // Spielstand initialisieren
     const initGameState = useCallback(async () => {
         try {
             // Versuche, gespeicherte Statistiken aus dem LocalStorage zu laden
             const savedStats = await localforage.getItem<GameStats>('brainbuster_stats')
 
-            if (savedStats) {
-                dispatch({
-                    type: 'INIT_GAME_STATE',
-                    payload: { stats: savedStats },
-                })
-            }
+            dispatch({
+                type: 'INIT_GAME_STATE',
+                payload: {
+                    stats: savedStats || initialStats,
+                    questions: sampleQuestions // Always ensure questions are loaded
+                }
+            });
         } catch (error) {
             console.error('Fehler beim Laden der Spielstatistiken:', error)
+            // Still ensure questions are loaded even if there's an error
+            dispatch({
+                type: 'INIT_GAME_STATE',
+                payload: { questions: sampleQuestions }
+            });
         }
     }, [])
 
     // Spiel starten
     const startGame = useCallback((mode: 'solo' | 'multiplayer', questions?: Question[]) => {
         // Wenn keine Fragen übergeben werden, Beispielfragen verwenden
-        const gameQuestions = questions || sampleQuestions
+        const gameQuestions = questions && questions.length > 0 ? questions : sampleQuestions
+
+        console.log("Starting game with questions:", gameQuestions.length);
 
         dispatch({
             type: 'START_GAME',
